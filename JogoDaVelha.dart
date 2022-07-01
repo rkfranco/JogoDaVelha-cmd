@@ -2,7 +2,17 @@ import 'dart:io';
 import 'dart:math';
 
 void main() {
-  List<String> tabela = [" ", " ", " ", " ", " ", " ", " ", " ", " ",];
+  List<String> tabela = [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+  ];
   bool playerW = false;
   bool pcW = false;
   bool empate = false;
@@ -16,7 +26,7 @@ void main() {
 
     while ((coord < 0 || coord > 8) || tabela[coord] != " ") {
       print("Digite aonde jogar: ");
-      coord = int.parse(stdin.readLineSync()!);
+      coord = mapearControles(stdin.readLineSync()!);
       // Null Safety
       // ! no fim significa que o resultado apesar de poder retornar null, não vai(Como o compilador enxerga);
       // ?? "ret" -> se colocasse isso no lugar da exclamação, caso a entrada fosse null coord receberia "ret"
@@ -35,7 +45,7 @@ void main() {
       tabela[temp] = "O";
       temp = -1;
       pcW = verificarGanhador(tabela);
-    } else {
+    } else if (!playerW && !pcW) {
       empate = true;
       print("Empate!");
     }
@@ -84,10 +94,35 @@ bool verificarGanhador(List<String> tabela) {
 }
 
 void printTabela(List<String> tabela) {
-  print("------------");
+  print("----------");
   for (int i = 0; i < 7; i++) {
     print(tabela[i] + " | " + tabela[i + 1] + " | " + tabela[i + 2]);
-    print("------------");
+    print("----------");
     i += 2;
+  }
+}
+
+int mapearControles(String entrada) {
+  switch (entrada) {
+    case '1':
+      return 6;
+    case '2':
+      return 7;
+    case '3':
+      return 8;
+    case '4':
+      return 3;
+    case '5':
+      return 4;
+    case '6':
+      return 5;
+    case '7':
+      return 0;
+    case '8':
+      return 1;
+    case '9':
+      return 2;
+    default:
+      return -1;
   }
 }
