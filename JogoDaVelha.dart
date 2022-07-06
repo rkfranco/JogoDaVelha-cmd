@@ -37,7 +37,7 @@ void main() {
     coord = -1;
     playerW = verificarGanhador(tabela);
 
-    if (!listaCheia(tabela)) {
+    if (!(listaCheia(tabela) && playerW)) {
       while (temp == -1 || tabela[temp] != " ") {
         temp = num.nextInt(9);
       }
